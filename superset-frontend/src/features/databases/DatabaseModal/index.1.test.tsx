@@ -21,6 +21,7 @@
 
 import fetchMock from 'fetch-mock';
 import userEvent from '@testing-library/user-event';
+import DatabaseModal from './index';
 import {
   render,
   screen,
