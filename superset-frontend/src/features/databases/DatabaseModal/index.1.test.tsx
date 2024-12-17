@@ -21,7 +21,6 @@
 
 import fetchMock from 'fetch-mock';
 import userEvent from '@testing-library/user-event';
-import DatabaseModal from './index';
 import {
   render,
   screen,
@@ -29,6 +28,7 @@ import {
   cleanup,
   act,
 } from 'spec/helpers/testing-library';
+import DatabaseModal from './index';
 import { DatabaseObject, ConfigurationMethod } from '../types';
 
 jest.mock('@superset-ui/core', () => ({
