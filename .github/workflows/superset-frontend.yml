@@ -79,7 +79,8 @@ jobs:
           docker run --rm superset-node-${{ github.sha }} bash -c \
           "npm run test -- --coverage --silent --shard=${{ matrix.shard }}/5"
 
-      - uses: actions/upload-artifact@v3
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v3
         with:
           name: coverage-artifacts
           path: coverage/
@@ -89,7 +90,6 @@ jobs:
     if: needs.frontend-docker-build.result == 'success'
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
         with:
           name: coverage-artifacts
