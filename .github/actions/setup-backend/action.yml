@@ -45,6 +45,8 @@ runs:
           sudo apt-get update && sudo apt-get -y install libldap2-dev libsasl2-dev
 
           if [ "${{ env.PYTHON_VERSION }}" = "next" ]; then
+            # numpy needs setuptools in 3.11
+            pip install setuptools
             # No wheel in 3.11 for numpy
             sudo apt-get install build-essential
           fi
