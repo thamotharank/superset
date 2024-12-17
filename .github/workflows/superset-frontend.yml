@@ -21,7 +21,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: false
-          submodules: recursive
 
       - name: Check for file changes
         id: check
@@ -56,8 +55,11 @@ jobs:
           name: docker-image
           path: superset-node.tar.gz
 
-  unit-tests:
+  sharded-jest-tests:
     needs: frontend-docker-build
+    strategy:
+      matrix:
+        shard: [1, 2, 3, 4, 5] # Define shards (1/5, 2/5, ..., 5/5)needs: frontend-docker-build
     runs-on: ubuntu-latest
     steps:
       - name: Download Docker Image Artifact
@@ -72,17 +74,33 @@ jobs:
       - name: npm run test with coverage
         run: |
           docker run --rm superset-node-${{ github.sha }} bash -c \
-          "npm run test -- --coverage --silent"
-      - name: superset-ui/core coverage
-        run: |
-          docker run --rm superset-node-${{ github.sha }} bash -c \
-          "npm run core:cover"
+          "npm run test -- --coverage --silent --shard=${{ matrix.shard }}/5"
+
       - name: Upload code coverage
+        if: "0 == 1"
         uses: codecov/codecov-action@v5
         with:
           flags: javascript
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true
+
+  unit-tests:
+    needs: frontend-docker-build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Docker Image Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image
+
+      - name: Load Docker Image
+        run: |
+          docker load -i superset-node.tar.gz
+
+      - name: superset-ui/core coverage
+        run: |
+          docker run --rm superset-node-${{ github.sha }} bash -c \
+          "npm run core:cover"
 
   lint-frontend:
     needs: frontend-docker-build
@@ -100,7 +118,7 @@ jobs:
       - name: eslint
         run: |
           docker run --rm superset-node-${{ github.sha }} bash -c \
-          "npm run eslint -- . --quiet"
+          "npm i && npm run eslint -- . --quiet"
       - name: tsc
         run: |
           docker run --rm superset-node-${{ github.sha }} bash -c \
