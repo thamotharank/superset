@@ -70,12 +70,10 @@ jobs:
           docker load -i superset-node.tar.gz
 
       - name: npm run test with coverage
-        working-directory: ./superset-frontend
         run: |
           docker run --rm superset-node-${{ github.sha }} bash -c \
           "npm run test -- --coverage --silent"
       - name: superset-ui/core coverage
-        working-directory: ./superset-frontend
         run: |
           docker run --rm superset-node-${{ github.sha }} bash -c \
           "npm run core:cover"
@@ -126,7 +124,6 @@ jobs:
           docker run --rm superset-node-${{ github.sha }} bash -c \
           "npm run plugins:build"
       - name: Build plugins Storybook
-        working-directory: ./superset-frontend
         run: |
           docker run --rm superset-node-${{ github.sha }} bash -c \
           "npm run plugins:build-storybook"
