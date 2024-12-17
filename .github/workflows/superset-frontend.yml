@@ -50,6 +50,8 @@ jobs:
           docker save $TAG | gzip > superset-node.tar.gz
 
       - name: Upload Docker Image Artifact
+        if: steps.check.outputs.frontend
+        shell: bash
         uses: actions/upload-artifact@v4
         with:
           name: docker-image
