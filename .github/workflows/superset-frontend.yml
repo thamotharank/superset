@@ -89,7 +89,7 @@ jobs:
     if: needs.frontend-docker-build.result == 'success'
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: coverage-artifacts
           path: coverage
