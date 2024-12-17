@@ -27,17 +27,8 @@ import {
   within,
   cleanup,
   act,
-  waitFor,
 } from 'spec/helpers/testing-library';
-import { getExtensionsRegistry } from '@superset-ui/core';
-import setupExtensions from 'src/setup/setupExtensions';
-import * as hooks from 'src/views/CRUD/hooks';
 import { DatabaseObject, ConfigurationMethod } from '../types';
-import DatabaseModal, {
-  dbReducer,
-  DBReducerActionType,
-  ActionType,
-} from './index';
 
 jest.mock('@superset-ui/core', () => ({
   ...jest.requireActual('@superset-ui/core'),
@@ -302,16 +293,6 @@ fetchMock.mock(AVAILABLE_DB_ENDPOINT, {
 fetchMock.post(VALIDATE_PARAMS_ENDPOINT, {
   message: 'OK',
 });
-
-const databaseFixture: DatabaseObject = {
-  id: 123,
-  backend: 'postgres',
-  configuration_method: ConfigurationMethod.DynamicForm,
-  database_name: 'Postgres',
-  name: 'PostgresDB',
-  is_managed_externally: false,
-  driver: 'psycopg2',
-};
 
 describe('DatabaseModal', () => {
   const renderAndWait = async () => {

@@ -92,7 +92,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: coverage-artifacts
-          path: coverage
+          path: coverage/
 
       - name: Merge Code Coverage
         run: npx nyc merge coverage/ merged-output/merged-coverage.json
