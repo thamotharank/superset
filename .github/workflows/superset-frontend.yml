@@ -1,4 +1,4 @@
-name: Frontend
+name: "Frontend Build CI (unit tests, linting & sanity checks)"
 
 on:
   push:
@@ -50,7 +50,7 @@ jobs:
           docker save $TAG | gzip > superset-node.tar.gz
 
       - name: Upload Docker Image Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: docker-image
           path: superset-node.tar.gz
@@ -60,10 +60,10 @@ jobs:
     strategy:
       matrix:
         shard: [1, 2, 3, 4, 5] # Define shards (1/5, 2/5, ..., 5/5)needs: frontend-docker-build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Download Docker Image Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: docker-image
 
@@ -76,8 +76,25 @@ jobs:
           docker run --rm superset-node-${{ github.sha }} bash -c \
           "npm run test -- --coverage --silent --shard=${{ matrix.shard }}/5"
 
+      - uses: actions/upload-artifact@v3
+        with:
+          name: coverage-artifacts
+          path: coverage/
+
+  report-coverage:
+    runs-on: ubuntu-22.04
+    needs: [frontend-docker-build]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: coverage-artifacts
+          path: coverage
+
+      - name: Merge Code Coverage
+        run: npx nyc merge coverage/ merged-output/merged-coverage.json
+
       - name: Upload code coverage
-        if: "0 == 1"
         uses: codecov/codecov-action@v5
         with:
           flags: javascript
@@ -86,7 +103,7 @@ jobs:
 
   unit-tests:
     needs: frontend-docker-build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Download Docker Image Artifact
         uses: actions/download-artifact@v3
@@ -104,7 +121,7 @@ jobs:
 
   lint-frontend:
     needs: frontend-docker-build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Download Docker Image Artifact
         uses: actions/download-artifact@v3
@@ -126,7 +143,7 @@ jobs:
 
   validate-frontend:
     needs: frontend-docker-build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Download Docker Image Artifact
         uses: actions/download-artifact@v3
