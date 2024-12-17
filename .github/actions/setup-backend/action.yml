@@ -42,7 +42,13 @@ runs:
     - name: Install dependencies
       run: |
         if [ "${{ inputs.install-superset }}" = "true" ]; then
-          sudo apt-get update && sudo apt-get -y install libldap2-dev libsasl2-dev build-essentials
+          sudo apt-get update && sudo apt-get -y install libldap2-dev libsasl2-dev
+
+          if [ "${{ env.PYTHON_VERSION }}" = "next" ]; then
+            # No wheel in 3.11 for numpy
+            sudo apt-get install build-essential
+          fi
+
           pip install --upgrade pip setuptools wheel uv
 
           if [ "${{ inputs.requirements-type }}" = "dev" ]; then
