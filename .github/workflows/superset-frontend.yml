@@ -93,6 +93,8 @@ jobs:
     steps:
       - name: Download Docker Image Artifact
         uses: actions/upload-artifact/merge@v4
+        with:
+          name: coverage-artifacts
 
       - name: Show files
         run: find .
