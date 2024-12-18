@@ -77,11 +77,12 @@ jobs:
         run: |
           docker run --rm superset-node-${{ github.sha }} bash -c \
           "npm run test -- --coverage --silent --shard=${{ matrix.shard }}/5"
+          mv coverage/coverage-summary.json coverage/coverage-shard-${{ matrix.shard }}.json
 
       - name: Upload coverage artifact
         uses: actions/upload-artifact@v3
         with:
-          name: coverage-artifacts-${{ matrix.shard }}
+          name: coverage-artifacts
           path: coverage/
 
   report-coverage:
@@ -91,8 +92,8 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4
         with:
+          name: coverage-artifacts
           path: coverage/
-          pattern: coverage-artifacts-*
 
       - name: Merge Code Coverage
         run: find .
