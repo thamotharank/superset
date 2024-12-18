@@ -61,7 +61,7 @@ jobs:
     if: needs.frontend-docker-build.result == 'success'
     strategy:
       matrix:
-        shard: [1, 2, 3, 4, 5] # Define shards (1/5, 2/5, ..., 5/5)needs: frontend-docker-build
+        shard: [1, 2, 3, 4, 5, 6, 7, 8]
     runs-on: ubuntu-22.04
     steps:
       - name: Download Docker Image Artifact
@@ -76,9 +76,8 @@ jobs:
       - name: npm run test with coverage
         run: |
           docker run --rm superset-node-${{ github.sha }} bash -c \
-          "npm run test -- --coverage --silent --shard=${{ matrix.shard }}/5"
-          find .
-          mv coverage/coverage-summary.json coverage/coverage-shard-${{ matrix.shard }}.json | true
+          "npm run test -- --coverage --silent --shard=${{ matrix.shard }}/8" --coverageReporters="json-summary"
+          find coverage/
 
       - name: Upload coverage artifact
         uses: actions/upload-artifact@v4
@@ -92,9 +91,10 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Download Docker Image Artifact
-        uses: actions/upload-artifact/merge@v4
+        uses: actions/download-artifact@v4
         with:
           name: coverage-artifacts
+          merge-multiple: true
 
       - name: Show files
         run: find .
