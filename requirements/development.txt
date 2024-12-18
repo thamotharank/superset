@@ -173,12 +173,6 @@ sqloxide==0.1.51
     # via apache-superset
 statsd==4.0.1
     # via apache-superset
-tomli==2.1.0
-    # via
-    #   build
-    #   coverage
-    #   pip-tools
-    #   pytest
 toposort==1.10
     # via pip-compile-multi
 tqdm==4.67.1
