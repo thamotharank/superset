@@ -81,7 +81,7 @@ jobs:
           mv coverage/coverage-summary.json coverage/coverage-shard-${{ matrix.shard }}.json | true
 
       - name: Upload coverage artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-artifacts
           path: coverage/
@@ -91,12 +91,10 @@ jobs:
     if: needs.frontend-docker-build.result == 'success'
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: coverage-artifacts
-          path: coverage/
+      - name: Download Docker Image Artifact
+        uses: actions/upload-artifact/merge@v4
 
-      - name: Merge Code Coverage
+      - name: Show files
         run: find .
 
       - name: Merge Code Coverage
