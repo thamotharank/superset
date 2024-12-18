@@ -95,6 +95,9 @@ jobs:
           pattern: coverage-artifacts-*
 
       - name: Merge Code Coverage
+        run: find .
+
+      - name: Merge Code Coverage
         run: npx nyc merge coverage/ merged-output/merged-coverage.json
 
       - name: Upload code coverage
@@ -104,7 +107,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true
 
-  unit-tests:
+  core-cover:
     needs: frontend-docker-build
     if: needs.frontend-docker-build.result == 'success'
     runs-on: ubuntu-22.04
