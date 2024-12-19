@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  frontend-docker-build:
+  frontend-build:
     runs-on: ubuntu-22.04
     steps:
       - name: "Checkout ${{ github.ref }} ( ${{ github.sha }} )"
@@ -102,6 +102,7 @@ jobs:
         with:
           name: coverage-artifacts
           merge-multiple: true
+          pattern: coverage/*
 
       - name: Show files
         run: find .
