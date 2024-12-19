@@ -51,7 +51,6 @@ jobs:
             --push
             --load
             --preset superset-node-ci \
-            --platform  linux/amd64 \
             --extra-flags "--tag $TAG"
 
           docker save $TAG | gzip > superset-node.tar.gz
