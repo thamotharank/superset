@@ -76,7 +76,7 @@ jobs:
       - name: npm run test with coverage
         run: |
           docker run --rm superset-node-${{ github.sha }} bash -c \
-          "npm run test -- --coverage --silent --shard=${{ matrix.shard }}/8 --coverageReporters="json-summary"
+          'npm run test -- --coverage --silent --shard=${{ matrix.shard }}/8 --coverageReporters="json-summary"'
           find .
 
       - name: Upload coverage artifact
