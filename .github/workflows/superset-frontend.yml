@@ -82,9 +82,12 @@ jobs:
 
       - name: npm run test with coverage
         run: |
-          docker run --rm superset-node-${{ github.sha }} bash -c \
+          docker run \
+          --rm superset-node-${{ github.sha }} \
+          -v ${{ github.workspace }}/coverage:/app/superset-frontend/coverage \
+          bash -c \
           'npm run test -- --coverage --silent --shard=${{ matrix.shard }}/8 --coverageReporters="json-summary"'
-          find .
+          find coverage
 
       - name: Upload coverage artifact
         uses: actions/upload-artifact@v4
