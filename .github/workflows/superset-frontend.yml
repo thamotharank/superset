@@ -46,7 +46,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           TAG="superset-node-${{ github.sha }}"
-          docker buildx build --target superset-node-ci -t $TAG   .
+
+          supersetbot docker \
+            --push
+            --load
+            --preset superset-node-ci \
+            --platform  linux/amd64 \
+            --extra-flags "--tag $TAG"
+
           docker save $TAG | gzip > superset-node.tar.gz
 
       - name: Upload Docker Image Artifact
