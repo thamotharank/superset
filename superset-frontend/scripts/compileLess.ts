@@ -52,7 +52,8 @@ function findHbsFiles(dir: string): string[] {
       const fullPath = path.join(dir, file);
       if (fs.statSync(fullPath).isDirectory()) {
         return findHbsFiles(fullPath);
-      } else if (fullPath.endsWith('.less.hbs')) {
+      }
+      if (fullPath.endsWith('.less.hbs')) {
         return fullPath;
       }
       return null;
