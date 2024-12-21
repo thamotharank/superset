@@ -88,6 +88,7 @@
 
 /************************************************************************/
 /* OPACITIES                                                            */
+/* Used in LESS filters, e.g. fade(@someColorVar, @someOpacityBelow)    */
 /************************************************************************/
 @opacity-light: {{theme.opacity.light}};
 @opacity-medium-light: {{theme.opacity.mediumLight}};
@@ -135,7 +136,11 @@
 
 /************************************************************************/
 /* TYPOGRAPHY                                                           */
+/* Commonly used font weights, line heights, etc. These should be the   */
+/* core values used to build more complex styles for headers, etc.      */
 /************************************************************************/
+@font-size-base: 14px; // Base `rem` units on this, as needed.
+
 @font-weight-light: {{theme.typography.weights.light}};
 @font-weight-normal: {{theme.typography.weights.normal}};
 @font-weight-bold: {{theme.typography.weights.bold}};

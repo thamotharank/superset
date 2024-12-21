@@ -21,26 +21,26 @@
 /* COLORS                                                               */
 /************************************************************************/
 
-@primary-color: #20A7C9;
+@primary-color: #20a7c9;
 @indicator-color: @primary-color;
 
-@brand-primary-dark1: #1A85A0;
+@brand-primary-dark1: #1a85a0;
 @brand-primary-dark2: #156378;
-@brand-primary-light1: #79CADE;
-@brand-primary-light2: #A5DAE9;
-@brand-primary-light3: #D2EDF4;
-@brand-primary-light4: #E9F6F9;
-@brand-primary-light5: #F3F8FA;
+@brand-primary-light1: #79cade;
+@brand-primary-light2: #a5dae9;
+@brand-primary-light3: #d2edf4;
+@brand-primary-light4: #e9f6f9;
+@brand-primary-light5: #f3f8fa;
 
-@brand-secondary: #444E7C;
-@brand-secondary-dark1: #363E63;
-@brand-secondary-dark2: #282E4A;
-@brand-secondary-dark3: #1B1F31;
-@brand-secondary-light1: #8E94B0;
-@brand-secondary-light2: #B4B8CA;
-@brand-secondary-light3: #D9DBE4;
-@brand-secondary-light4: #ECEEF2;
-@brand-secondary-light5: #F5F5F8;
+@brand-secondary: #444e7c;
+@brand-secondary-dark1: #363e63;
+@brand-secondary-dark2: #282e4a;
+@brand-secondary-dark3: #1b1f31;
+@brand-secondary-light1: #8e94b0;
+@brand-secondary-light2: #b4b8ca;
+@brand-secondary-light3: #d9dbe4;
+@brand-secondary-light4: #eceef2;
+@brand-secondary-light5: #f5f5f8;
 
 // TODO line up with theme
 @almost-black: #263238;
@@ -55,39 +55,40 @@
 @darkest: #000000;
 
 /**************************** text-specific *****************************/
-@link: #66BCFE;
-@link-hover: #4D8CBE;
+@link: #66bcfe;
+@link-hover: #4d8cbe;
 
 /***************************** status colors ****************************/
-@info: #66BCFE;
-@info-dark1: #4D8CBE;
-@info-dark2: #315E7E;
-@info-light1: #B3DEFE;
-@info-light2: #EFF8FE;
+@info: #66bcfe;
+@info-dark1: #4d8cbe;
+@info-dark2: #315e7e;
+@info-light1: #b3defe;
+@info-light2: #eff8fe;
 
-@danger: #E04355;
-@danger-dark1: #A7323F;
-@danger-dark2: #6F212A;
-@danger-light1: #EFA1AA;
-@danger-light2: #FAEDEE;
+@danger: #e04355;
+@danger-dark1: #a7323f;
+@danger-dark2: #6f212a;
+@danger-light1: #efa1aa;
+@danger-light2: #faedee;
 
-@success: #5AC189;
+@success: #5ac189;
 @success-dark1: #439066;
-@success-dark2: #2B6144;
-@success-light1: #ACE1C4;
-@success-light2: #EEF8F3;
+@success-dark2: #2b6144;
+@success-light1: #ace1c4;
+@success-light2: #eef8f3;
 
-@warning: #FF7F44;
-@warning-dark1: #BF5E33;
-@warning-dark2: #7F3F21;
-@warning-light1: #FEC0A1;
-@warning-light2: #FFF2EC;
+@warning: #ff7f44;
+@warning-dark1: #bf5e33;
+@warning-dark2: #7f3f21;
+@warning-light1: #fec0a1;
+@warning-light2: #fff2ec;
 
 /* general component effects */
 @shadow-highlight: @primary-color;
 
 /************************************************************************/
 /* OPACITIES                                                            */
+/* Used in LESS filters, e.g. fade(@someColorVar, @someOpacityBelow)    */
 /************************************************************************/
 @opacity-light: 10%;
 @opacity-medium-light: 35%;
@@ -135,7 +136,11 @@
 
 /************************************************************************/
 /* TYPOGRAPHY                                                           */
+/* Commonly used font weights, line heights, etc. These should be the   */
+/* core values used to build more complex styles for headers, etc.      */
 /************************************************************************/
+@font-size-base: 14px; // Base `rem` units on this, as needed.
+
 @font-weight-light: 200;
 @font-weight-normal: 400;
 @font-weight-bold: 600;
