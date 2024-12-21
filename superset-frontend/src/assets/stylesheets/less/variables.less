@@ -188,23 +188,16 @@
 
 /************************************************************************/
 /* BORDER RADII                                                         */
+/* Standard border-radius settings                                      */
 /************************************************************************/
 @border-radius-normal: 4px;
-@border-radius-large: (4 * 2)px;
+@border-radius-large: (@border-radius-normal * 2);
 
 /************************************************************************/
-/* GRID UNITS                                                           */
+/* BOOTSTRAP/BOOTSWATCH/COSMO                                           */
+/* These are the legacy Cosmo theme overrides to Bootswatch's           */
+/* overrides to Bootstrap. We should consolidate/deprecate these        */
+/* in favor of custom/reusable CSS wherever possible                    */
 /************************************************************************/
-@grid-unit: 4px;
 
-/************************************************************************/
-/* Z-INDEX                                                              */
-/************************************************************************/
-@z-index-max: 3000;
-@z-index-dropdown: 11;
-@z-index-above-dashboard-charts: 10;
-
-/************************************************************************/
-/* LEGACY IMPORTS                                                       */
-/************************************************************************/
 @import '../less/cosmo/variables.less';
